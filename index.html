@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f5f7f8" />
+  <meta name="description" content="Book and manage clinic appointments securely." />
+  <title>Carepoint — Patient Booking</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Carepoint home"><span class="brand-mark">✚</span><span>carepoint<span class="brand-dot">.</span></span></a>
+      <div class="clinic-switch"><span class="clinic-avatar">EC</span><span><b>Eldoret Clinic</b><small>General practice</small></span><span class="switch-chevron">⌄</span></div>
+      <p class="nav-label">WORKSPACE</p>
+      <nav class="side-nav" aria-label="Main navigation">
+        <button class="nav-item active" data-view="overview"><span>▦</span> Overview</button>
+        <button class="nav-item" data-view="appointments"><span>▤</span> Appointments <i id="nav-count">0</i></button>
+        <button class="nav-item" data-view="patients"><span>♙</span> Patients</button>
+      </nav>
+      <p class="nav-label management-label">MANAGEMENT</p>
+      <nav class="side-nav" aria-label="Management navigation">
+        <button class="nav-item" data-view="schedule"><span>▦</span> Schedule</button>
+        <button class="nav-item" data-view="settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="help-card"><span class="help-icon">?</span><b>Need a hand?</b><p>Our support team is here to help you.</p><a href="mailto:support@carepoint.example">Contact support <span>↗</span></a></div>
+        <button class="user-profile" id="staff-button"><span class="user-avatar">ST</span><span><b id="staff-label">Clinic staff</b><small id="connection-label">Checking connection…</small></span><span class="profile-more">···</span></button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div class="breadcrumbs"><span>Workspace</span><span class="crumb-slash">/</span><b id="crumb-current">Overview</b></div><div class="top-actions"><button class="icon-button" aria-label="Notifications">♧<i></i></button><span class="top-divider"></span><button class="clinic-chip"><span class="online-dot"></span> Clinic open <span>⌄</span></button></div></header>
+      <div class="page-wrap">
+        <section class="welcome-row"><div><p class="eyebrow" id="today-label">THURSDAY, OCTOBER 30, 2026</p><h1 id="page-heading">Good morning, team <span>☀</span></h1><p class="page-subtitle" id="page-subtitle">Here’s what’s happening at your clinic today.</p></div><button class="button button-primary" id="new-appointment"><span>＋</span> New appointment</button></section>
+        <section class="stats-grid" aria-label="Today's statistics">
+          <article class="stat-card"><div class="stat-top"><span>Appointments today</span><span class="stat-icon teal">▤</span></div><div class="stat-number" id="stat-today">—</div><div class="stat-foot"><span class="stat-neutral" id="stat-today-note">Live clinic schedule</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Waiting for confirmation</span><span class="stat-icon amber">◷</span></div><div class="stat-number" id="stat-pending">—</div><div class="stat-foot"><span class="stat-neutral">Needs your attention</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Confirmed</span><span class="stat-icon blue">✓</span></div><div class="stat-number" id="stat-confirmed">—</div><div class="stat-foot"><span class="stat-neutral">Ready for the visit</span></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Completed this month</span><span class="stat-icon violet">♧</span></div><div class="stat-number" id="stat-completed">—</div><div class="stat-foot"><span class="stat-neutral">Appointments completed</span></div></article>
+        </section>
+
+        <section class="content-grid">
+          <div class="panel appointments-panel"><div class="panel-heading"><div><h2 id="list-heading">Upcoming appointments</h2><p id="list-caption">A quick look at your clinic schedule.</p></div><button class="text-button" id="view-all">View all <span>→</span></button></div>
+            <div class="filter-row"><div class="segmented" role="tablist"><button class="filter active" data-filter="upcoming">Upcoming <span id="upcoming-count">0</span></button><button class="filter" data-filter="all">All</button></div><label class="search-box"><span>⌕</span><input id="search-input" type="search" placeholder="Search patients…" aria-label="Search patients" /></label></div>
+            <div class="table-scroll"><table><thead><tr><th>PATIENT</th><th>DATE &amp; TIME</th><th>VISIT TYPE</th><th>STATUS</th><th></th></tr></thead><tbody id="appointment-rows"></tbody></table><div class="empty-state" id="empty-state" hidden><div class="empty-icon">▤</div><b>No appointments yet</b><p>Appointments will show up here once patients book a visit.</p><button class="button button-secondary" id="empty-book">＋ Create an appointment</button></div></div>
+            <div class="table-footer"><span id="table-total">Showing 0 appointments</span><button id="refresh-button" class="refresh-button">↻ Refresh</button></div>
+          </div>
+          <aside class="right-column"><section class="panel mini-calendar"><div class="panel-heading calendar-heading"><div><h2>Schedule</h2><p id="calendar-month">October 2026</p></div><div class="calendar-arrows"><button id="cal-prev" aria-label="Previous month">‹</button><button id="cal-next" aria-label="Next month">›</button></div></div><div class="calendar-grid" id="calendar-grid"></div><div class="calendar-legend"><span><i class="legend-dot active-dot"></i> Today</span><span><i class="legend-dot booked-dot"></i> Has bookings</span></div></section>
+          <section class="panel quick-panel"><div class="panel-heading"><div><h2>Quick actions</h2><p>Common tasks, right here.</p></div></div><button class="quick-action" id="quick-book"><span class="quick-icon teal">＋</span><span><b>Book an appointment</b><small>Add a patient to the schedule</small></span><span class="quick-arrow">→</span></button><button class="quick-action" id="quick-schedule"><span class="quick-icon blue">▦</span><span><b>View full schedule</b><small>See all upcoming visits</small></span><span class="quick-arrow">→</span></button><button class="quick-action" id="export-button"><span class="quick-icon violet">↧</span><span><b>Export appointment list</b><small>Download a CSV file</small></span><span class="quick-arrow">→</span></button></section>
+          <section class="secure-note"><span>♧</span><p><b>Your data is protected</b><br />Patient information is stored securely and only visible to authorized clinic staff.</p></section></aside>
+        </section>
+        <footer class="app-footer"><span>© 2026 Carepoint Health</span><span><i class="online-dot"></i><span id="footer-connection">Connecting to Supabase</span></span></footer>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="appointment-dialog" class="modal"><form id="appointment-form"><div class="modal-head"><div><span class="modal-kicker">PATIENT BOOKING</span><h2>New appointment</h2><p>Add the patient details and choose an available time.</p></div><button type="button" class="close-modal" data-close aria-label="Close">×</button></div><div class="form-grid"><label class="field full-field">Patient name<input name="patient_name" required maxlength="120" placeholder="e.g. Amina Wanjiku" autocomplete="name" /></label><label class="field">Email address<input name="email" type="email" required maxlength="254" placeholder="patient@example.com" autocomplete="email" /></label><label class="field">Phone number <span class="optional">Optional</span><input name="phone" type="tel" maxlength="32" placeholder="+254 700 000 000" autocomplete="tel" /></label><label class="field">Appointment date<input name="appointment_date" type="date" required /></label><label class="field">Time slot<select name="time_slot" required><option value="">Choose a time</option><option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option><option>12:00</option><option>14:00</option><option>15:00</option><option>16:00</option></select></label><label class="field full-field">Visit type<select name="visit_type"><option>General consultation</option><option>Follow-up visit</option><option>Health check-up</option><option>Vaccination</option><option>Other</option></select></label></div><div class="form-message" id="form-message" role="status"></div><div class="modal-actions"><button class="button button-secondary" type="button" data-close>Cancel</button><button class="button button-primary" id="submit-appointment" type="submit">Book appointment <span>→</span></button></div></form></dialog>
+
+  <dialog id="auth-dialog" class="modal"><form id="auth-form"><div class="modal-head"><div><span class="modal-kicker">STAFF ACCESS</span><h2>Sign in to your clinic</h2><p>Sign in with your Supabase staff account to view patient records.</p></div><button type="button" class="close-modal" data-close aria-label="Close">×</button></div><label class="field">Email address<input name="email" type="email" required autocomplete="username" /></label><label class="field auth-password">Password<input name="password" type="password" required autocomplete="current-password" /></label><div class="form-message" id="auth-message" role="status"></div><div class="modal-actions"><button class="button button-secondary" type="button" data-close>Cancel</button><button class="button button-primary" type="submit">Sign in</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="config.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
